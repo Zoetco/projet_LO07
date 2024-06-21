@@ -1,13 +1,13 @@
 <!-- ----- début viewInserted.php -->
 <?php
-require ($root . '/app/view/fragment/fragmentCaveHeader.html');
+require ($root . '/app/view/fragment/fragmentPatrimoineHeader.html');
 ?>
 
 <body>
   <div class="container">
     <?php
-    include $root . '/app/view/fragment/fragmentCaveMenu.html';
-    include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
+    include $root . '/app/view/fragment/fragmentPatrimoineMenu.html';
+    include $root . '/app/view/fragment/fragmentPatrimoineJumbotron.html';
 
     if ($results) {
       echo "<h3>La nouvelle récolte a été ajoutée/mise à jour</h3>";
@@ -23,6 +23,6 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
 
   </div>
 
-  <?php include $root . '/app/view/fragment/fragmentCaveFooter.html'; ?>
+  <?php include $root . '/app/view/fragment/fragmentPatrimoineFooter.html'; ?>
 </body>
 <!-- ----- fin viewInserted.php -->
