@@ -1,29 +1,20 @@
 
-<!-- ----- debut ControllerCave -->
+<!-- ----- debut ControllerPatrimoine -->
 <?php
-require_once '../model/ModelProducteur.php';
 
-class ControllerCave {
+class ControllerPatrimoine {
  // --- page d'acceuil
- public static function caveAccueil() {
+ public static function patrimoineAccueil() {
   include 'config.php';
-  $vue = $root . '/app/view/viewCaveAccueil.php';
+  $vue = $root . '/app/view/viewPatrimoineAccueil.php';
   if (DEBUG)
-   echo ("ControllerCave : caveAccueil : vue = $vue");
+   echo ("ControllerPatrimoine : patrimoineAccueil : vue = $vue");
   require ($vue);
  }
 
- // --- Mes propositions
- public static function mesPropositions() {
-  // ----- Construction chemin de la vue
-  include 'config.php';
-  $vue = $root . '/app/view/mesPropositions.php';
-  if (DEBUG)
-   echo ("ControllerProducteur : prodReadAll : vue = $vue");
-  require ($vue);
- }
+ 
 }
 ?>
-<!-- ----- fin ControllerCave -->
+<!-- ----- fin ControllerPatrimoine -->
 
 
