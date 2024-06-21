@@ -143,14 +143,14 @@ public static function insert($id, $label, $montant, $banque_id, $personne_id) {
  public static function update($id, $label, $montant, $banque_id, $personne_id) {
   try {
    $database = Model::getInstance();
-   $query = "update compte set montant = :montant where id = :id and label = :label";
+   $query = "update compte set montant = :montant where banque_id = :banque_id and personne_id = :personne_id";
    $statement = $database->prepare($query);
    $statement->execute([
      'montant' => $montant,
-     'id' => $id,
-     'label' => $label
+     'banque_id' => $banque_id,
+     'personne_id' => $personne_id
    ]);
-   return array($id, $label);
+   return array($banque_id, $personne_id);
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return NULL;
