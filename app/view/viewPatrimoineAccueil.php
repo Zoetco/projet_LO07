@@ -1,20 +1,20 @@
  
-<!-- ----- debut de la page cave_acceuil -->
-<?php include 'fragment/fragmentCaveHeader.html'; ?>
+<!-- ----- debut de la page patrimoine_accueil -->
+<?php include 'fragment/fragmentPatrimoineHeader.html'; ?>
 <body>
   <div class="container">
     <?php
-    include 'fragment/fragmentCaveMenu.html';
-    include 'fragment/fragmentCaveJumbotron.html';
+    include 'fragment/fragmentPatrimoineMenu.html';
+    include 'fragment/fragmentPatrimoineJumbotron.html';
     ?>
   </div>   
   
   
   <?php
-  include 'fragment/fragmentCaveFooter.html';
+  include 'fragment/fragmentPatrimoineFooter.html';
   ?>
 
-  <!-- ----- fin de la page cave_acceuil -->
+  <!-- ----- fin de la page patrimoine_accueil -->
 
 </body>
 </html>

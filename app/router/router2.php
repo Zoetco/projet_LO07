@@ -1,10 +1,10 @@
 
 <!-- ----- debut Router2 -->
 <?php
-require ('../controller/ControllerCave.php');
-require ('../controller/ControllerVin.php');
-require ('../controller/ControllerProducteur.php');
-require ('../controller/ControllerRecolte.php');
+require ('../controller/ControllerBanque.php');
+require ('../controller/ControllerCompte.php');
+require ('../controller/ControllerPatrimoine.php');
+require ('../controller/ControllerPersonne.php');
 
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
