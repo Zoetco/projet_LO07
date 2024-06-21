@@ -1,20 +1,22 @@
 
-<!-- ----- debut ModelProducteur -->
+<!-- ----- debut ModelPersonne -->
 
 <?php
 require_once 'Model.php';
 
-class ModelProducteur {
- private $id, $nom, $prenom, $region;
+class ModelPersonne {
+ private $id, $nom, $prenom, $statut, $login, $password;
 
  // pas possible d'avoir 2 constructeurs
- public function __construct($id = NULL, $nom = NULL, $prenom = NULL, $region = NULL) {
+ public function __construct($id = NULL, $nom = NULL, $prenom = NULL, $statut = NULL) {
   // valeurs nulles si pas de passage de parametres
   if (!is_null($id)) {
    $this->id = $id;
    $this->nom = $nom;
    $this->prenom = $prenom;
-   $this->region = $region;
+   $this->statut = $statut;
+   $this->login = $login;
+   $this->password = $password;
   }
  }
 
@@ -30,10 +32,18 @@ class ModelProducteur {
   $this->prenom = $prenom;
  }
 
- function setRegion($region) {
-  $this->region = $region;
+ function setStatut($statut) {
+  $this->statut = $statut;
  }
 
+ function setLogin($login) {
+     $this->login = $login;
+ }
+
+function setPassword($password) {
+    $this->password = $password;
+}
+ 
  function getId() {
   return $this->id;
  }
@@ -46,16 +56,23 @@ class ModelProducteur {
   return $this->prenom;
  }
 
- function getRegion() {
-  return $this->region;
+ function getStatut() {
+  return $this->statut;
  }
- 
+
+ function getLogin() {
+  return $this->login;
+ }
+
+ function getPassword() {
+  return $this->password;
+ }
  
 // retourne une liste des id
  public static function getAllId() {
   try {
    $database = Model::getInstance();
-   $query = "select id from producteur";
+   $query = "select id from personne";
    $statement = $database->prepare($query);
    $statement->execute();
    $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
@@ -71,7 +88,7 @@ class ModelProducteur {
    $database = Model::getInstance();
    $statement = $database->prepare($query);
    $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelProducteur");
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelPersonne");
    return $results;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
@@ -82,10 +99,10 @@ class ModelProducteur {
  public static function getAll() {
   try {
    $database = Model::getInstance();
-   $query = "select * from producteur";
+   $query = "select * from personne";
    $statement = $database->prepare($query);
    $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelProducteur");
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelPersonne");
    return $results;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
@@ -93,43 +110,15 @@ class ModelProducteur {
   }
  }
 
- public static function getNbParRegion() {
-  try {
-   $database = Model::getInstance();
-   $query = "select COUNT(*) as nb_prod, region from producteur group by region";
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
- 
- public static function getRegions() {
-  try {
-   $database = Model::getInstance();
-   $query = "select distinct region from producteur";
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
- 
  public static function getOne($id) {
   try {
    $database = Model::getInstance();
-   $query = "select * from producteur where id = :id";
+   $query = "select * from personne where id = :id";
    $statement = $database->prepare($query);
    $statement->execute([
      'id' => $id
    ]);
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelProducteur");
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelPersonne");
    return $results;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
@@ -137,7 +126,7 @@ class ModelProducteur {
   }
  }
 
- public static function insert($nom, $prenom, $region) {
+ public static function insert($nom, $prenom, $statut, $login, $password) {
   try {
    $database = Model::getInstance();
 
@@ -149,13 +138,15 @@ class ModelProducteur {
    $id++;
 
    // ajout d'un nouveau tuple;
-   $query = "insert into producteur value (:id, :nom, :prenom, :region)";
+   $query = "insert into personne value (:id, :nom, :prenom, :statut, :login, :password)";
    $statement = $database->prepare($query);
    $statement->execute([
      'id' => $id,
      'nom' => $nom,
      'prenom' => $prenom,
-     'region' => $region
+     'statut' => $statut,
+     'login' => $login,
+     'password' => $password
    ]);
    return $id;
   } catch (PDOException $e) {
@@ -165,7 +156,7 @@ class ModelProducteur {
  }
 
  public static function update() {
-  echo ("ModelProducteur : update() TODO ....");
+  echo ("ModelPersonne : update() TODO ....");
   return null;
  }
 
@@ -174,7 +165,7 @@ class ModelProducteur {
    $database = Model::getInstance();
 
    // suppression du tuple;
-   $query = "delete from producteur where id = :id";
+   $query = "delete from personne where id = :id";
    $statement = $database->prepare($query);
    $statement->execute([
      'id' => $id
@@ -188,4 +179,4 @@ class ModelProducteur {
 
 }
 ?>
-<!-- ----- fin ModelProducteur -->
+<!-- ----- fin ModelPersonne -->
