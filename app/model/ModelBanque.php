@@ -1,20 +1,19 @@
 
-<!-- ----- debut ModelVin -->
+<!-- ----- debut ModelBanque -->
 
 <?php
 require_once 'Model.php';
 
-class ModelVin {
- private $id, $cru, $annee, $degre;
+class ModelBanque {
+ private $id, $label, $pays;
 
  // pas possible d'avoir 2 constructeurs
- public function __construct($id = NULL, $cru = NULL, $annee = NULL, $degre = NULL) {
+ public function __construct($id = NULL, $label = NULL, $pays = NULL) {
   // valeurs nulles si pas de passage de parametres
   if (!is_null($id)) {
    $this->id = $id;
-   $this->cru = $cru;
-   $this->annee = $annee;
-   $this->degre = $degre;
+   $this->label = $label;
+   $this->pays = $pays;
   }
  }
 
@@ -22,40 +21,32 @@ class ModelVin {
   $this->id = $id;
  }
 
- function setCru($cru) {
-  $this->cru = $cru;
+ function setLabel($label) {
+  $this->label = $label;
  }
 
- function setAnnee($annee) {
-  $this->annee = $annee;
- }
-
- function setDegre($degre) {
-  $this->degre = $degre;
+ function setPays($pays) {
+  $this->pays = $pays;
  }
 
  function getId() {
   return $this->id;
  }
 
- function getCru() {
-  return $this->cru;
+ function getLabel() {
+  return $this->label;
  }
 
- function getAnnee() {
-  return $this->annee;
+ function getPays() {
+  return $this->pays;
  }
 
- function getDegre() {
-  return $this->degre;
- }
- 
  
 // retourne une liste des id
  public static function getAllId() {
   try {
    $database = Model::getInstance();
-   $query = "select id from vin";
+   $query = "select id from banque";
    $statement = $database->prepare($query);
    $statement->execute();
    $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
@@ -71,7 +62,7 @@ class ModelVin {
    $database = Model::getInstance();
    $statement = $database->prepare($query);
    $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelVin");
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelBanque");
    return $results;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
@@ -82,10 +73,10 @@ class ModelVin {
  public static function getAll() {
   try {
    $database = Model::getInstance();
-   $query = "select * from vin";
+   $query = "select * from banque";
    $statement = $database->prepare($query);
    $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelVin");
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelBanque");
    return $results;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
@@ -96,12 +87,12 @@ class ModelVin {
  public static function getOne($id) {
   try {
    $database = Model::getInstance();
-   $query = "select * from vin where id = :id";
+   $query = "select * from banque where id = :id";
    $statement = $database->prepare($query);
    $statement->execute([
      'id' => $id
    ]);
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelVin");
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelBanque");
    return $results;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
@@ -109,25 +100,24 @@ class ModelVin {
   }
  }
 
- public static function insert($cru, $annee, $degre) {
+ public static function insert($label, $pays) {
   try {
    $database = Model::getInstance();
 
    // recherche de la valeur de la clé = max(id) + 1
-   $query = "select max(id) from vin";
+   $query = "select max(id) from banque";
    $statement = $database->query($query);
    $tuple = $statement->fetch();
    $id = $tuple['0'];
    $id++;
 
    // ajout d'un nouveau tuple;
-   $query = "insert into vin value (:id, :cru, :annee, :degre)";
+   $query = "insert into banque value (:id, :label, :pays)";
    $statement = $database->prepare($query);
    $statement->execute([
      'id' => $id,
-     'cru' => $cru,
-     'annee' => $annee,
-     'degre' => $degre
+     'label' => $label,
+     'pays' => $pays
    ]);
    return $id;
   } catch (PDOException $e) {
@@ -137,7 +127,7 @@ class ModelVin {
  }
 
  public static function update() {
-  echo ("ModelVin : update() TODO ....");
+  echo ("ModelBanque : update() TODO ....");
   return null;
  }
 
@@ -146,7 +136,7 @@ class ModelVin {
    $database = Model::getInstance();
 
    // suppression du tuple;
-   $query = "delete from vin where id = :id";
+   $query = "delete from banque where id = :id";
    $statement = $database->prepare($query);
    $statement->execute([
      'id' => $id
@@ -160,4 +150,4 @@ class ModelVin {
 
 }
 ?>
-<!-- ----- fin ModelVin -->
+<!-- ----- fin ModelBanque -->

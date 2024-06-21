@@ -1,44 +1,62 @@
 
-<!-- ----- debut ModelRecolte -->
+<!-- ----- debut ModelCompte -->
 
 <?php
 require_once 'Model.php';
 
 class ModelRecolte {
- private $producteur_id, $vin_id, $quantite;
+ private $id, $label, $montant, $banque_id, $personne_id;
 
  // pas possible d'avoir 2 constructeurs
- public function __construct($producteur_id = NULL, $vin_id = NULL, $quantite = NULL) {
+ public function __construct($id = NULL, $label = NULL, $montant = NULL, $banque_id = NULL, $personne_id = NULL) {
   // valeurs nulles si pas de passage de parametres
-  if (!is_null($producteur_id)) {
-   $this->producteur_id = $producteur_id;
-   $this->vin_id = $vin_id;
-   $this->quantite = $quantite;
+  if (!is_null($id)) {
+   $this->id = $id;
+   $this->label = $label;
+   $this->montant = $montant;
+   $this->banque_id = $banque_id;
+   $this->personne_id = $personne_id;
   }
  }
 
- function setProdId($producteur_id) {
-  $this->producteur_id = $producteur_id;
+ function setId($id) {
+  $this->id = $id;
  }
 
- function setVinId($vin_id) {
-  $this->vin_id = $vin_id;
+ function setLabel($label) {
+  $this->label = $label;
  }
 
- function setQuantite($quantite) {
-  $this->quantite = $quantite;
+ function setMontant($montant) {
+  $this->montant = $montant;
  }
 
- function getProdId() {
-  return $this->producteur_id;
+ function setBanqueId($banque_id) {
+  $this->banque_id = $banque_id;
+ }
+ 
+ function setPersonneId($personne_id) {
+  $this->personne_id = $personne_id;
+ }
+ 
+ function getId() {
+  return $this->id;
  }
 
- function getVinId() {
-  return $this->vin_id;
+ function getLabel() {
+  return $this->label;
  }
 
- function getQuantite() {
-  return $this->quantite;
+ function getMontant() {
+  return $this->montant;
+ }
+ 
+ function getBanqueId() {
+  return $this->banque_id;
+ }
+ 
+ function getPersonneId() {
+  return $this->personne_id;
  }
  
 
@@ -76,10 +94,10 @@ class ModelRecolte {
  public static function getAll() {
   try {
    $database = Model::getInstance();
-   $query = "select * from recolte";
+   $query = "select * from compte";
    $statement = $database->prepare($query);
    $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelRecolte");
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelCompte");
    return $results;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
@@ -87,31 +105,33 @@ class ModelRecolte {
   }
  }
 
- public static function getOne($producteur_id, $vin_id) {
+ public static function getOne($id, $label) {
   try {
    $database = Model::getInstance();
-   $query = "select * from recolte where producteur_id = :producteur_id and vin_id = :vin_id";
+   $query = "select * from compte where id = :id and label = :label";
    $statement = $database->prepare($query);
    $statement->execute([
-     'producteur_id' => $producteur_id,
-     'vin_id' => $vin_id
+     'id' => $id,
+     'label' => $label
    ]);
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelRecolte");
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelCompte");
    return $results;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return NULL;
   }
  }
-public static function insert($producteur_id, $vin_id, $quantite) {
+public static function insert($id, $label, $montant, $banque_id, $personne_id) {
   try {
    $database = Model::getInstance();
-   $query = "insert into recolte (producteur_id, vin_id, quantite) values (:producteur_id, :vin_id, :quantite)";
+   $query = "insert into compte (id, label, montant, banque_id, personne_id) values (:id, :label, :montant, :banque_id, :personne_id)";
    $statement = $database->prepare($query);
    $statement->execute([
-     'producteur_id' => $producteur_id,
-     'vin_id' => $vin_id,
-     'quantite' => $quantite
+     'id' => $id,
+     'label' => $label,
+     'montant' => $montant,
+     'banque_id' => $banque_id,
+     'personne_id' => $personne_id
    ]);
    return $database->lastInsertId();
   } catch (PDOException $e) {
@@ -120,17 +140,17 @@ public static function insert($producteur_id, $vin_id, $quantite) {
   }
  }
 
- public static function update($producteur_id, $vin_id, $quantite) {
+ public static function update($id, $label, $montant, $banque_id, $personne_id) {
   try {
    $database = Model::getInstance();
-   $query = "update recolte set quantite = :quantite where producteur_id = :producteur_id and vin_id = :vin_id";
+   $query = "update compte set montant = :montant where id = :id and label = :label";
    $statement = $database->prepare($query);
    $statement->execute([
-     'quantite' => $quantite,
-     'producteur_id' => $producteur_id,
-     'vin_id' => $vin_id
+     'montant' => $montant,
+     'id' => $id,
+     'label' => $label
    ]);
-   return array($producteur_id, $vin_id);
+   return array($id, $label);
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return NULL;
@@ -139,4 +159,4 @@ public static function insert($producteur_id, $vin_id, $quantite) {
  
 }
 ?>
-<!-- ----- fin ModelRecolte -->
+<!-- ----- fin ModelCompte -->
