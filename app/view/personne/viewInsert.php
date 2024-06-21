@@ -2,14 +2,14 @@
 <!-- ----- début viewInsert -->
  
 <?php 
-require ($root . '/app/view/fragment/fragmentCaveHeader.html');
+require ($root . '/app/view/fragment/fragmentPatrimoineHeader.html');
 ?>
 
 <body>
   <div class="container">
     <?php
-      include $root . '/app/view/fragment/fragmentCaveMenu.html';
-      include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
+      include $root . '/app/view/fragment/fragmentPatrimoineMenu.html';
+      include $root . '/app/view/fragment/fragmentPatrimoineJumbotron.html';
     ?> 
 
     <form role="form" method='get' action='router2.php'>
@@ -17,7 +17,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
         <input type="hidden" name='action' value='prodCreated'>        
         <label class='w-25' for="id">nom : </label><input type="text" name='nom' size='75' value='Stone'> <br/>                          
         <label class='w-25' for="id">prenom : </label><input type="text" name='prenom' size='75' value='Emma'> <br/> 
-        <label class='w-25' for="id">region : </label><input type="text" name='region' size='75' value='Alsace'>        <br/>          
+        <label class='w-25' for="id">statut : </label><input type="text" name='statut' size='75' value='1'>        <br/>          
       </div>
       <p/>
        <br/> 
@@ -25,7 +25,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     </form>
     <p/>
   </div>
-  <?php include $root . '/app/view/fragment/fragmentCaveFooter.html'; ?>
+  <?php include $root . '/app/view/fragment/fragmentPatrimoineFooter.html'; ?>
 
 <!-- ----- fin viewInsert -->
 
