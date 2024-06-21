@@ -13,7 +13,7 @@ $query_string = $_SERVER['QUERY_STRING'];
 // une table de hachage (clé + valeur)
 parse_str($query_string, $param);
 
-// --- $action contient le nom de la méthode statique recherchée
+// --- $action contient le nom de la méthode statique compteherchée
 $action = htmlspecialchars($param["action"]);
 
 // Modification du routeur pour prendre en compte l'ensemble des parametres
@@ -27,41 +27,41 @@ $args = $param;
 
 // --- Liste des méthodes autorisées
 switch ($action) {
- case "vinReadAll" :
- case "vinReadOne" :
- case "vinReadId" :
- case "vinCreate" :
- case "vinCreated" :
- case "vinDeleted" :
-  ControllerVin::$action($args);
+ case "banqueReadAll" :
+ case "banqueReadOne" :
+ case "banqueReadId" :
+ case "banqueCreate" :
+ case "banqueCreated" :
+ case "banqueDeleted" :
+  ControllerBanque::$action($args);
   break;
 
- case "prodReadAll" :
- case "prodReadOne" :
- case "prodReadId" :
- case "prodCreate" :
- case "prodCreated" :
- case "prodNbParRegion" :
- case "prodRegions" :
- case "prodDeleted" :
-  ControllerProducteur::$action($args);
+ case "personneReadAll" :
+ case "personneReadOne" :
+ case "personneReadId" :
+ case "personneCreate" :
+ case "personneCreated" :
+ case "personneNbParRegion" :
+ case "personneRegions" :
+ case "personneDeleted" :
+  ControllerPersonne::$action($args);
   break;
 
- case "recReadAll" :
- case "recRequetes" :
- case "recCreate" :
- case "recCreated" :
-  ControllerRecolte::$action($args);
+ case "compteReadAll" :
+ case "compteRequetes" :
+ case "compteCreate" :
+ case "compteCreated" :
+  ControllerCompte::$action($args);
   break;
 
  case "mesPropositions" :
-  ControllerCave::$action($args);
+  ControllerPatrimoine::$action($args);
   break;
 
  // Tache par défaut
  default:
-  $action = "caveAccueil";
-  ControllerCave::$action($args);
+  $action = "patrimoineAccueil";
+  ControllerPatrimoine::$action($args);
 }
 ?>
 <!-- ----- Fin Router2 -->

@@ -1,103 +1,83 @@
 
-<!-- ----- debut ControllerProducteur -->
+<!-- ----- debut ControllerPersonne -->
 <?php
-require_once '../model/ModelProducteur.php';
+require_once '../model/ModelPersonne.php';
 
-class ControllerProducteur {
- // --- Liste des producteurs
- public static function prodReadAll() {
-  $results = ModelProducteur::getAll();
+class ControllerPersonne {
+ // --- Liste des personnes
+ public static function personneReadAll() {
+  $results = ModelPersonne::getAll();
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/producteur/viewAll.php';
+  $vue = $root . '/app/view/personne/viewAll.php';
   if (DEBUG)
-   echo ("ControllerProducteur : prodReadAll : vue = $vue");
+   echo ("ControllerPersonne : personneReadAll : vue = $vue");
   require ($vue);
  }
 
  // Affiche un formulaire pour sélectionner un id qui existe
- public static function prodReadId($args) {
+ public static function personneReadId($args) {
   //if (DEBUG) echo ("ControllerVin::vinReadId:begin</br>");
-  $results = ModelProducteur::getAllId();
+  $results = ModelPersonne::getAllId();
   
   // passage du nom de la méthode cible pour le champ action du formulaire
-  // Solution 1 : prodReadOne
-  // Solution 2 : prodDeleted
+  // Solution 1 : personneReadOne
+  // Solution 2 : personneDeleted
   
   $target = $args['target'];
   //if (DEBUG) echo ("ControllerVin::vinReadId : target = $target</br>");
 
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/producteur/viewId.php';
+  $vue = $root . '/app/view/personne/viewId.php';
   require ($vue);
  }
 
- // Affiche un producteur particulier (id)
- public static function prodReadOne() {
-  $prod_id = $_GET['id'];
-  $results = ModelProducteur::getOne($prod_id);
+ // Affiche un personne particulier (id)
+ public static function personneReadOne() {
+  $personne_id = $_GET['id'];
+  $results = ModelPersonne::getOne($id);
 
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/producteur/viewAll.php';
+  $vue = $root . '/app/view/personne/viewAll.php';
   require ($vue);
  }
 
- // Affiche le formulaire de creation d'un producteur
- public static function prodCreate() {
+ // Affiche le formulaire de creation d'un personne
+ public static function personneCreate() {
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/producteur/viewInsert.php';
+  $vue = $root . '/app/view/personne/viewInsert.php';
   require ($vue);
  }
 
- // Affiche un formulaire pour récupérer les informations d'un nouveau producteur.
+ // Affiche un formulaire pour récupérer les informations d'un nouveau personne.
  // La clé est gérée par le systeme et pas par l'internaute
- public static function prodCreated() {
+ public static function personneCreated() {
   // ajouter une validation des informations du formulaire
-  $results = ModelProducteur::insert(
-      htmlspecialchars($_GET['nom']), htmlspecialchars($_GET['prenom']), htmlspecialchars($_GET['region'])
+  $results = ModelPersonne::insert(
+      htmlspecialchars($_GET['nom']), htmlspecialchars($_GET['prenom']), htmlspecialchars($_GET['statut'])
   );
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/producteur/viewInserted.php';
+  $vue = $root . '/app/view/personne/viewInserted.php';
   require ($vue);
  }
- 
- // Liste sans doublon des régions
- public static function prodNbParRegion() {
-  $results = ModelProducteur::getNbParRegion();
+  
+ // Supprime un personne particulier (id)
+ public static function personneDeleted() {
+  $personne_id = $_GET['id'];
+  $results = ModelPersonne::delete($id);
 
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/producteur/viewNbParRegion.php';
-  require ($vue);
- }
- 
- // Affiche le nombre de producteurs par région
- public static function prodRegions() {
-  $results = ModelProducteur::getRegions();
-
-  // ----- Construction chemin de la vue
-  include 'config.php';
-  $vue = $root . '/app/view/producteur/viewRegions.php';
-  require ($vue);
- }
- 
- // Supprime un producteur particulier (id)
- public static function prodDeleted() {
-  $prod_id = $_GET['id'];
-  $results = ModelProducteur::delete($prod_id);
-
-  // ----- Construction chemin de la vue
-  include 'config.php';
-  $vue = $root . '/app/view/producteur/viewDeleted.php';
+  $vue = $root . '/app/view/personne/viewDeleted.php';
   require ($vue);
  }
  
 }
 ?>
-<!-- ----- fin ControllerProducteur -->
+<!-- ----- fin ControllerPersonne -->
 
 
