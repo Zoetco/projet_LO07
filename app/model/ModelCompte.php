@@ -4,7 +4,7 @@
 <?php
 require_once 'Model.php';
 
-class ModelRecolte {
+class ModelCompte {
  private $id, $label, $montant, $banque_id, $personne_id;
 
  // pas possible d'avoir 2 constructeurs
