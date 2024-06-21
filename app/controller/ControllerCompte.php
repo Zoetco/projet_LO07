@@ -1,68 +1,53 @@
 
-<!-- ----- debut ControllerRecolte -->
+<!-- ----- debut ControllerCompte -->
 <?php
-require_once '../model/ModelRecolte.php';
-require_once '../model/ModelVin.php';
-require_once '../model/ModelProducteur.php';
+require_once '../model/ModelCompte.php';
+require_once '../model/ModelBanque.php';
+require_once '../model/ModelPersonne.php';
 
-class ControllerRecolte {
- // --- Liste des vins
- public static function recReadAll() {
-  $results = ModelRecolte::getAll();
+class ControllerCompte {
+ // --- Liste des comptes
+ public static function compteReadAll() {
+  $results = ModelCompte::getAll();
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/recolte/viewAll.php';
+  $vue = $root . '/app/view/compte/viewAll.php';
   if (DEBUG)
-   echo ("ControllerRecolte : recReadAll : vue = $vue");
-  require ($vue);
- }
-
- public static function recRequetes() {
-  $query1 = "select region, cru, annee, degre, nom, prenom, quantite from vin, producteur, recolte where recolte.vin_id = vin.id and recolte.producteur_id = producteur.id order by region";
-  $query2 = "select vin.id, producteur.id, region, cru, nom, prenom, quantite from vin, producteur, recolte where recolte.vin_id = vin.id and recolte.producteur_id = producteur.id order by vin.id, producteur_id";
-
-  $results1 = ModelRecolte::executeQuery($query1);
-  $results2 = ModelRecolte::executeQuery($query2);
-
-  // ----- Construction chemin de la vue
-  include 'config.php';
-  $vue = $root . '/app/view/recolte/viewRequete.php';
-  if (DEBUG)
-   echo ("ControllerRecolte : recRequetes : vue = $vue");
+   echo ("ControllerCompte : compteReadAll : vue = $vue");
   require ($vue);
  }
  
- public static function recCreate() {
-  $vins = ModelVin::getAll();
-  $producteurs = ModelProducteur::getAll();
+ public static function compteCreate() {
+  $vins = ModelBanque::getAll();
+  $producteurs = ModelPersonne::getAll();
   include 'config.php';
-  $vue = $root . '/app/view/recolte/viewInsert.php';
+  $vue = $root . '/app/view/compte/viewInsert.php';
   if (DEBUG)
-   echo ("ControllerRecolte : recCreate : vue = $vue");
+   echo ("ControllerCompte : compteCreate : vue = $vue");
   require ($vue);
  }
 
- public static function recCreated($args) {
-  $producteur_id = htmlspecialchars($args['producteur_id']);
-  $vin_id = htmlspecialchars($args['vin_id']);
-  $quantite = htmlspecialchars($args['quantite']);
+ public static function compteCreated($args) {
+  $producteur_id = htmlspecialchars($args['banque_id']);
+  $vin_id = htmlspecialchars($args['personne_id']);
+  $quantite = htmlspecialchars($args['montant']);
 
-  $existingRecolte = ModelRecolte::getOne($producteur_id, $vin_id);
+  $existingRecolte = ModelCompte::getOne($banque_id, $personne_id);
   if (empty($existingRecolte)) {
-    $results = ModelRecolte::insert($producteur_id, $vin_id, $quantite);
+    $results = ModelCompte::insert($banque_id, $personne_id, $montant);
   } else {
-    $results = ModelRecolte::update($producteur_id, $vin_id, $quantite);
+    $results = ModelCompte::update($banque_id, $personne_id, $montant);
   }
 
   include 'config.php';
-  $vue = $root . '/app/view/recolte/viewInserted.php';
+  $vue = $root . '/app/view/compte/viewInserted.php';
   if (DEBUG)
-   echo ("ControllerRecolte : recCreated : vue = $vue");
+   echo ("ControllerCompte : compteCreated : vue = $vue");
   require ($vue);
  }
  
 }
 ?>
-<!-- ----- fin ControllerRecolte -->
+<!-- ----- fin ControllerCompte -->
 
 

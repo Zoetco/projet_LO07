@@ -1,83 +1,83 @@
 
-<!-- ----- debut ControllerVin -->
+<!-- ----- debut ControllerBanque -->
 <?php
-require_once '../model/ModelVin.php';
+require_once '../model/ModelBanque.php';
 
-class ControllerVin {
- // --- Liste des vins
- public static function vinReadAll() {
-  $results = ModelVin::getAll();
+class ControllerBanque {
+ // --- Liste des banques
+ public static function banqueReadAll() {
+  $results = ModelBanque::getAll();
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/vin/viewAll.php';
+  $vue = $root . '/app/view/banque/viewAll.php';
   if (DEBUG)
-   echo ("ControllerVin : vinReadAll : vue = $vue");
+   echo ("ControllerBanque : banqueReadAll : vue = $vue");
   require ($vue);
  }
 
  // Affiche un formulaire pour sélectionner un id qui existe
- public static function vinReadId($args) {
-  //if (DEBUG) echo ("ControllerVin::vinReadId:begin</br>");
-  $results = ModelVin::getAllId();
+ public static function banqueReadId($args) {
+  //if (DEBUG) echo ("ControllerBanque::banqueReadId:begin</br>");
+  $results = ModelBanque::getAllId();
   
   // passage du nom de la méthode cible pour le champ action du formulaire
-  // Solution 1 : vinReadOne
-  // Solution 2 : vinDeleted
+  // Solution 1 : banqueReadOne
+  // Solution 2 : banqueDeleted
   
   $target = $args['target'];
-  //if (DEBUG) echo ("ControllerVin::vinReadId : target = $target</br>");
+  //if (DEBUG) echo ("ControllerBanque::banqueReadId : target = $target</br>");
 
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/vin/viewId.php';
+  $vue = $root . '/app/view/banque/viewId.php';
   require ($vue);
  }
 
- // Affiche un vin particulier (id)
- public static function vinReadOne() {
-  $vin_id = $_GET['id'];
-  $results = ModelVin::getOne($vin_id);
+ // Affiche un banque particulier (id)
+ public static function banqueReadOne() {
+  $banque_id = $_GET['id'];
+  $results = ModelBanque::getOne($id);
 
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/vin/viewAll.php';
+  $vue = $root . '/app/view/banque/viewAll.php';
   require ($vue);
  }
 
- // Affiche le formulaire de creation d'un vin
- public static function vinCreate() {
+ // Affiche le formulaire de creation d'un banque
+ public static function banqueCreate() {
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/vin/viewInsert.php';
+  $vue = $root . '/app/view/banque/viewInsert.php';
   require ($vue);
  }
 
- // Affiche un formulaire pour récupérer les informations d'un nouveau vin.
+ // Affiche un formulaire pour récupérer les informations d'un nouveau banque.
  // La clé est gérée par le systeme et pas par l'internaute
- public static function vinCreated() {
+ public static function banqueCreated() {
   // ajouter une validation des informations du formulaire
-  $results = ModelVin::insert(
-      htmlspecialchars($_GET['cru']), htmlspecialchars($_GET['annee']), htmlspecialchars($_GET['degre'])
+  $results = ModelBanque::insert(
+      htmlspecialchars($_GET['id']), htmlspecialchars($_GET['label']), htmlspecialchars($_GET['pays'])
   );
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/vin/viewInserted.php';
+  $vue = $root . '/app/view/banque/viewInserted.php';
   require ($vue);
  }
  
- // Supprime un vin particulier (id)
- public static function vinDeleted() {
-  $vin_id = $_GET['id'];
-  $results = ModelVin::delete($vin_id);
+ // Supprime un banque particulier (id)
+ public static function banqueDeleted() {
+  $banque_id = $_GET['id'];
+  $results = ModelBanque::delete($id);
 
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/vin/viewDeleted.php';
+  $vue = $root . '/app/view/banque/viewDeleted.php';
   require ($vue);
  }
  
 }
 ?>
-<!-- ----- fin ControllerVin -->
+<!-- ----- fin ControllerBanque -->
 
 
