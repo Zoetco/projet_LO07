@@ -173,6 +173,27 @@ function setPassword($password) {
   }
  }
 
+ public static function verifConnect($login, $password) {
+     //vérifie qu'il existe bien une personne avec ce login et password dans la base de données
+     //retourne $id, $nom, $prenom, $statut si oui
+     //retourne -1 sinon
+     try {
+        $database = Model::getInstance();
+        $query = "SELECT * FROM personne WHERE login = :login AND password = :password";
+        $statement = $database->prepare($query);
+        $statement->execute([
+            'login' => $login,
+            'password' => $password
+        ]);
+        $statement->setFetchMode(PDO::FETCH_CLASS, "ModelPersonne");
+        $result = $statement->fetch();
+        return $result ? $result : false;
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return false;
+    }     
+ }
+
  public static function update() {
   echo ("ModelPersonne : update() TODO ....");
   return null;

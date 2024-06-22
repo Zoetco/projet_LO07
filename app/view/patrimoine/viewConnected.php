@@ -1,5 +1,3 @@
-
-<!-- ----- début viewInserted -->
 <?php
 require ($root . '/app/view/fragment/fragmentPatrimoineHeader.html');
 ?>
@@ -13,23 +11,18 @@ require ($root . '/app/view/fragment/fragmentPatrimoineHeader.html');
     <!-- ===================================================== -->
     <?php
     if ($results) {
-     echo ("<h3>Félicitations ! Vous êtes maintenant inscrits ! </h3>");
+     echo ("<h3>Félicitations ! Vous êtes connecté.e ! </h3>");
      echo("<ul>");
-     echo ("<li>id = " . $results . "</li>");
-     echo ("<li>nom = " . $_GET['nom'] . "</li>");
-     echo ("<li>prenom = " . $_GET['prenom'] . "</li>");
-     echo ("<li>statut = " . $_GET['statut'] . "</li>");
+     echo ("<li>id = " . $results->getId() . "</li>");
+     echo ("<li>nom = " . $results->getNom() . "</li>");
+     echo ("<li>prenom = " . $results->getPrenom() . "</li>");
+     echo ("<li>statut = " . ($results->getStatut() == ModelPersonne::ADMINISTRATEUR ? "Administrateur" : "Client") . "</li>");
      echo("</ul>");
     } else {
-     echo ("<h3>Un problème est survenu</h3>");
-     echo ("id = " . $_GET['nom']);
+     echo ("<h3>Un problème est survenu. Identifiants incorrects.</h3>");
     }
-
     echo("</div>");
     
     include $root . '/app/view/fragment/fragmentPatrimoineFooter.html';
     ?>
-    <!-- ----- fin viewInserted -->    
-
-    
-    
+    <!-- ----- fin viewConnected -->

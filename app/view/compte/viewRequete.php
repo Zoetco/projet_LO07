@@ -6,7 +6,7 @@ require ($root . '/app/view/fragment/fragmentPatrimoineHeader.html');
 <body>
   <div class="container">
     <?php
-    include $root . '/app/view/fragment/fragmentPatrimoineMenu.html';
+    include $root . '/app/view/fragment/fragmentPatrimoineMenu.php';
     include $root . '/app/view/fragment/fragmentPatrimoineJumbotron.html';
     ?>
     <h3>Résultats de la première requête</h3>

@@ -1,14 +1,14 @@
 <!-- ----- debut mesPropositions -->
 <?php
 
-require ($root . '/app/view/fragment/fragmentCaveHeader.html');
+require ($root . '/app/view/fragment/fragmentPatrimoineHeader.html');
 ?>
 
 <body>
   <div class="container">
       <?php
-      include $root . '/app/view/fragment/fragmentCaveMenu.html';
-      include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
+      include $root . '/app/view/fragment/fragmentPatrimoineMenu.php';
+      include $root . '/app/view/fragment/fragmentPatrimoineJumbotron.html';
       ?>
 
     <div class="row">
@@ -25,7 +25,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
       </div>
     </div>
   </div>
-  <?php include $root . '/app/view/fragment/fragmentCaveFooter.html'; ?>
+  <?php include $root . '/app/view/fragment/fragmentPatrimoineFooter.html'; ?>
 </body>
 
 <!-- ----- fin mesPropositions -->
