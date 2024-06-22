@@ -55,16 +55,19 @@ class ControllerBanque {
 
  // Affiche un formulaire pour récupérer les informations d'un nouveau banque.
  // La clé est gérée par le systeme et pas par l'internaute
- public static function banqueCreated() {
-  // ajouter une validation des informations du formulaire
-  $results = ModelBanque::insert(
-      htmlspecialchars($_GET['id']), htmlspecialchars($_GET['label']), htmlspecialchars($_GET['pays'])
-  );
+public static function banqueCreated() {
+  // Validate input to ensure no null values are passed
+  $label = isset($_GET['label']) ? htmlspecialchars($_GET['label']) : '';
+  $pays = isset($_GET['pays']) ? htmlspecialchars($_GET['pays']) : '';
+  
+  // Make sure 'id' is not expected from the form as it is generated
+  $results = ModelBanque::insert($label, $pays);
+
   // ----- Construction chemin de la vue
   include 'config.php';
   $vue = $root . '/app/view/banque/viewInserted.php';
   require ($vue);
- }
+}
  
  // Supprime un banque particulier (id)
  public static function banqueDeleted() {
