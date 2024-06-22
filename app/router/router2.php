@@ -59,14 +59,14 @@ switch ($action) {
   break;
 
  case "mesPropositions" :
+ case "Inscription":
+ case "PersonneAjoutee":
   ControllerPatrimoine::$action($args);
   break;
 
  // Tache par défaut
  default:
   $action = "patrimoineAccueil";
-  $action = "Inscription";
-  $action = "PersonneAjoutee";
   ControllerPatrimoine::$action($args);
 }
 ?>

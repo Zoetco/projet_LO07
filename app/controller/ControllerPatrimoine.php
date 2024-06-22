@@ -8,7 +8,7 @@ class ControllerPatrimoine {
  // --- page d'acceuil
  public static function patrimoineAccueil() {
   include 'config.php';
-  $vue = $root . '/app/view/patrimoine/viewPatrimoineAccueil.php';
+  $vue = $root . '/app/view/viewPatrimoineAccueil.php';
   if (DEBUG)
    echo ("ControllerPatrimoine : patrimoineAccueil : vue = $vue");
   require ($vue);
@@ -26,9 +26,15 @@ class ControllerPatrimoine {
  // La clé est gérée par le systeme et pas par l'internaute
  public static function PersonneAjoutee() {
   // ajouter une validation des informations du formulaire
-  $results = ModelPersonne::insert(
-      htmlspecialchars($_GET['id']), htmlspecialchars($_GET['nom']), htmlspecialchars($_GET['prenom']), htmlspecialchars($_GET['statut']), htmlspecialchars($_GET['login']), htmlspecialchars($_GET['password'])
-  );
+  $id = htmlspecialchars($_GET['id'] ?? '');
+  $nom = htmlspecialchars($_GET['nom'] ?? '');
+  $prenom = htmlspecialchars($_GET['prenom'] ?? '');
+  $statut = htmlspecialchars($_GET['statut'] ?? '');
+  $login = htmlspecialchars($_GET['login'] ?? '');
+  $password = htmlspecialchars($_GET['password'] ?? '');
+
+  $results = ModelPersonne::insert($nom, $prenom, $statut, $login, $password);
+
   // ----- Construction chemin de la vue
   include 'config.php';
   $vue = $root . '/app/view/patrimoine/viewInserted.php';
