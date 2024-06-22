@@ -31,6 +31,7 @@ class ControllerPatrimoine {
 
   if ($results) {
     // Save user information in session
+    session_start();
     $_SESSION['id'] = $results->getId();
     $_SESSION['login'] = $results->getLogin();
     $_SESSION['statut'] = $results->getStatut();
