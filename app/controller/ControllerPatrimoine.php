@@ -71,6 +71,13 @@ class ControllerPatrimoine {
   require ($vue);
  }
  
+ public static function deconnection() {
+    session_unset();
+    session_destroy();
+    header('Location: router2.php?action=patrimoineAccueil');
+ }
+    
+ 
 }
 ?>
 <!-- ----- fin ControllerPatrimoine -->
