@@ -100,31 +100,47 @@ class ModelBanque {
   }
  }
 
- public static function insert($label, $pays) {
+public static function insert($label, $pays) {
   try {
-   $database = Model::getInstance();
+    $database = Model::getInstance();
+    
+    // Ensure label is not empty
+    if (empty($label)) {
+      throw new Exception("Label cannot be empty");
+    }
 
-   // recherche de la valeur de la clé = max(id) + 1
-   $query = "select max(id) from banque";
-   $statement = $database->query($query);
-   $tuple = $statement->fetch();
-   $id = $tuple['0'];
-   $id++;
+    // Check for duplicate label
+    $query = "SELECT COUNT(*) FROM banque WHERE label = :label";
+    $statement = $database->prepare($query);
+    $statement->execute(['label' => $label]);
+    if ($statement->fetchColumn() > 0) {
+      throw new Exception("Duplicate entry for label");
+    }
 
-   // ajout d'un nouveau tuple;
-   $query = "insert into banque value (:id, :label, :pays)";
-   $statement = $database->prepare($query);
-   $statement->execute([
-     'id' => $id,
-     'label' => $label,
-     'pays' => $pays
-   ]);
-   return $id;
+    // recherche de la valeur de la clé = max(id) + 1
+    $query = "SELECT MAX(id) FROM banque";
+    $statement = $database->query($query);
+    $tuple = $statement->fetch();
+    $id = $tuple[0] + 1;
+
+    // ajout d'un nouveau tuple;
+    $query = "INSERT INTO banque (id, label, pays) VALUES (:id, :label, :pays)";
+    $statement = $database->prepare($query);
+    $statement->execute([
+      'id' => $id,
+      'label' => $label,
+      'pays' => $pays
+    ]);
+    return $id;
   } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return -1;
+    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+    return -1;
+  } catch (Exception $e) {
+    echo $e->getMessage();
+    return -1;
   }
- }
+}
+
 
  public static function update() {
   echo ("ModelBanque : update() TODO ....");
