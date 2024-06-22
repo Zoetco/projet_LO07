@@ -12,33 +12,27 @@ require ($root . '/app/view/fragment/fragmentPatrimoineHeader.html');
 
     <form role="form" method='get' action='router2.php'>
       <div class="form-group">
-        <input type="hidden" name='action' value='recCreated'>
+        <input type="hidden" name='action' value='banqueCreated'>
+        
+        <label for="quantite">Label</label>
+        <input type="string" step="any" name='label' value='Epargne' class="form-control" style="width: 300px">
 
-        <label for="producteur_id">Sélectionner un producteur : </label>
-        <select class="form-control" id='producteur_id' name='producteur_id' style="width: 300px">
+        
+        <label for="quantite">Montant</label>
+        <input type="number" step="any" name='montant' value='100' class="form-control" style="width: 300px">
+
+        <label for="banque_id">Sélectionner une banque : </label>
+        <select class="form-control" id='banque_id' name='banque_id' style="width: 300px">
           <?php
-          foreach ($producteurs as $producteur) {
-            $id = $producteur->getId();
-            $nom = $producteur->getNom();
-            $prenom = $producteur->getPrenom();
-            echo "<option value='$id'>$nom $prenom</option>";
+          foreach ($banque as $banque) {
+            $id = $banque->getId();
+            $label = $banque->getLabel();
+            $pays = $banque->getPays();
+            echo "<option value='$id'>$label $pays</option>";
           }
           ?>
         </select>
 
-        <label for="vin_id">Sélectionner un vin : </label>
-        <select class="form-control" id='vin_id' name='vin_id' style="width: 300px">
-          <?php
-          foreach ($vins as $vin) {
-            $id = $vin->getId();
-            $cru = $vin->getCru();
-            echo "<option value='$id'>$cru</option>";
-          }
-          ?>
-        </select>
-
-        <label for="quantite">Quantité : </label>
-        <input type="number" step="any" name='quantite' value='10' class="form-control" style="width: 300px">
       </div>
       <p/>
       <button class="btn btn-primary" type="submit">Soumettre</button>
