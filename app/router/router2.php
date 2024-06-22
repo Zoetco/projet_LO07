@@ -58,6 +58,8 @@ switch ($action) {
   ControllerCompte::$action($args);
   break;
 
+ case "connection":
+ case "connected":
  case "mesPropositions" :
  case "Inscription":
  case "PersonneAjoutee":
