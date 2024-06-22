@@ -15,9 +15,9 @@ require ($root . '/app/view/fragment/fragmentPatrimoineHeader.html');
     if ($results) {
      echo ("<h3>La nouvelle Banque a été ajouté </h3>");
      echo("<ul>");
-     echo ("<li>id = " . $results . "</li>");
-     echo ("<li>cru = " . $_GET['label'] . "</li>");
-     echo ("<li>annee = " . $_GET['pays'] . "</li>");
+     echo ("<li>Id = " . $results . "</li>");
+     echo ("<li>Label = " . $_GET['label'] . "</li>");
+     echo ("<li>Année = " . $_GET['pays'] . "</li>");
      echo("</ul>");
     } else {
      echo ("<h3>Problème d'insertion de la banque</h3>");
