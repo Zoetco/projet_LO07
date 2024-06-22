@@ -65,6 +65,8 @@ switch ($action) {
  // Tache par défaut
  default:
   $action = "patrimoineAccueil";
+  $action = "Inscription";
+  $action = "PersonneAjoutee";
   ControllerPatrimoine::$action($args);
 }
 ?>

@@ -1,0 +1,35 @@
+
+<!-- ----- début viewInsert -->
+ 
+<?php 
+require ($root . '/app/view/fragment/fragmentPatrimoineHeader.html');
+?>
+
+<body>
+  <div class="container">
+    <?php
+      include $root . '/app/view/fragment/fragmentPatrimoineMenu.html';
+      include $root . '/app/view/fragment/fragmentPatrimoineJumbotron.html';
+    ?> 
+
+    <form role="form" method='get' action='router2.php'>
+      <div class="form-group">
+        <input type="hidden" name='action' value='PersonneAjoutee'>        
+        <label class='w-25' for="id">Nom : </label><input type="text" name='nom' size='75' value='Stone'> <br/>                          
+        <label class='w-25' for="id">Prénom : </label><input type="text" name='prenom' value='Emma'> <br/> 
+        <label class='w-25' for="id">Statut (0 = Administrateur ou 1 = Client) : </label><input type="number" step='any' name='statut' value='1'> <br/>          
+        <label class='w-25' for="id">Login : </label><input type="text" name='login' size='20' value='utilisateur'> <br/>                          
+        <label class='w-25' for="id">Mot de Passe : </label><input type="text" name='password' size='12' value='secret'> <br/>
+      </div>
+      <p/>
+       <br/> 
+      <button class="btn btn-primary" type="submit">Go</button>
+    </form>
+    <p/>
+  </div>
+  <?php include $root . '/app/view/fragment/fragmentPatrimoineFooter.html'; ?>
+
+<!-- ----- fin viewInsert -->
+
+
+
