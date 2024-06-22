@@ -2,6 +2,7 @@
 <!-- ----- debut ControllerBanque -->
 <?php
 require_once '../model/ModelBanque.php';
+require_once '../model/ModelCompte.php';
 
 class ControllerBanque {
  // --- Liste des banques
@@ -34,13 +35,13 @@ class ControllerBanque {
  }
 
  // Affiche un banque particulier (id)
- public static function banqueReadOne() {
-  $banque_id = $_GET['id'];
-  $results = ModelBanque::getOne($id);
+ public static function banqueReadAllAccounts() {
+  $id = $_GET['id'];
+  $results = ModelCompte::getCompteBanque($id);
 
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/banque/viewAll.php';
+  $vue = $root . '/app/view/compte/viewAll.php';
   require ($vue);
  }
 

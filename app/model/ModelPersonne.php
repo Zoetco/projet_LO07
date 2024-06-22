@@ -5,6 +5,8 @@
 require_once 'Model.php';
 
 class ModelPersonne {
+ public const ADMINISTRATEUR = 0;
+ public const CLIENT = 1;
  private $id, $nom, $prenom, $statut, $login, $password;
 
  // pas possible d'avoir 2 constructeurs
@@ -67,6 +69,22 @@ function setPassword($password) {
  function getPassword() {
   return $this->password;
  }
+ 
+ 
+ public static function getAllByStatut($statut) {
+    try {
+        $database = Model::getInstance();
+        $query = "select * from personne where statut = :statut";
+        $statement = $database->prepare($query);
+        $statement->execute(['statut' => $statut]);
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelPersonne");
+        return $results;
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return NULL;
+    }
+}
+
  
 // retourne une liste des id
  public static function getAllId() {

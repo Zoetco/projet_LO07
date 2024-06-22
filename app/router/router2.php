@@ -5,6 +5,8 @@ require ('../controller/ControllerBanque.php');
 require ('../controller/ControllerCompte.php');
 require ('../controller/ControllerPatrimoine.php');
 require ('../controller/ControllerPersonne.php');
+require ('../controller/ControllerAdministrateur.php');
+require ('../controller/ControllerClient.php');
 
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -28,23 +30,25 @@ $args = $param;
 // --- Liste des méthodes autorisées
 switch ($action) {
  case "banqueReadAll" :
- case "banqueReadOne" :
+ case "banqueReadAllAccounts" :
  case "banqueReadId" :
  case "banqueCreate" :
  case "banqueCreated" :
- case "banqueDeleted" :
   ControllerBanque::$action($args);
   break;
 
  case "personneReadAll" :
  case "personneReadOne" :
  case "personneReadId" :
- case "personneCreate" :
- case "personneCreated" :
- case "personneNbParRegion" :
- case "personneRegions" :
- case "personneDeleted" :
   ControllerPersonne::$action($args);
+  break;
+
+ case "clientReadAll" :
+  ControllerClient::$action($args);
+  break;
+  
+ case "administrateurReadAll" :
+  ControllerAdministrateur::$action($args);
   break;
 
  case "compteReadAll" :
