@@ -149,7 +149,7 @@ function setPassword($password) {
    $database = Model::getInstance();
 
    // recherche de la valeur de la clé = max(id) + 1
-   $query = "select max(id) from producteur";
+   $query = "select max(id) from personne";
    $statement = $database->query($query);
    $tuple = $statement->fetch();
    $id = $tuple['0'];

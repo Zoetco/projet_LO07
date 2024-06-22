@@ -59,6 +59,8 @@ switch ($action) {
   break;
 
  case "mesPropositions" :
+ case "Inscription":
+ case "PersonneAjoutee":
   ControllerPatrimoine::$action($args);
   break;
 
