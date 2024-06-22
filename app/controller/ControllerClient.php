@@ -12,8 +12,6 @@ class ControllerClient {
             echo ("ControllerClient : clientReadAll : vue = $vue");
         require ($vue);
     }
-
-    // Autres méthodes spécifiques aux clients...
 }
 ?>
 <!-- ----- fin ControllerClient -->

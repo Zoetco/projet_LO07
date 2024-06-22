@@ -4,9 +4,9 @@
 
 <nav class="navbar navbar-expand-lg bg-success fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="router2.php?action=CaveAccueil">KNECHT-BOUTIN</a>
+    <a class="navbar-brand" href="router2.php?action=PatrimoineAccueil">KNECHT-BOUTIN</a>
     
-    <?php if (isset($_SESSION['login'])): ?>
+    <?php if (isset($_SESSION['nom'])): ?>
       <span class="navbar-text mx-3">
         |<?php echo htmlspecialchars($_SESSION['nom']) . ' ' . htmlspecialchars($_SESSION['prenom']) . ' | ' . ($_SESSION['statut'] == 0 ? 'Administrateur' : 'Client') . ' '; ?>|
       </span>
@@ -62,24 +62,24 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mes comptes Bancaires</a>
           <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="">Liste de mes comptes</a></li>
-            <li><a class="dropdown-item" href="">Ajouter un nouveau compte</a></li>
-            <li><a class="dropdown-item" href="">Transfert inter-comptes</a></li>
+              <li><a class="dropdown-item" href="router2.php?action=clientMesComptes">Liste de mes comptes</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=clientCompteCreate&target=clientCompteCreated">Ajouter un nouveau compte</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=clientCompteTransfer&target=clientCompteTransfered">Transfert inter-comptes</a></li>
           </ul>
         </li>
         
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mes Résidences</a>
           <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="">Liste de mes résidences</a></li>
-            <li><a class="dropdown-item" href="">Achat d'une nouvelle résidence</a></li>
+              <li><a class="dropdown-item" href="router2.php?action=clientMesResidences">Liste de mes résidences</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=clientResidenceAchat&target=clientResidenceAchete">Achat d'une nouvelle résidence</a></li>
           </ul>
         </li>  
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon patrimoine</a>
           <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="">Bilan de mon patrimoine</a></li>
+              <li><a class="dropdown-item" href="router2.php?action=clientMonPatrimoine">Bilan de mon patrimoine</a></li>
           </ul>
         </li>
         

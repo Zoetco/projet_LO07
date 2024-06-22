@@ -75,7 +75,10 @@ class ControllerPatrimoine {
  public static function deconnection() {
     session_unset();
     session_destroy();
-    header('Location: router2.php?action=patrimoineAccueil');
+    // ----- Construction chemin de la vue
+  include 'config.php';
+  $vue = $root . '/app/view/patrimoine/viewDeconnected.php';
+  require ($vue);
  }
     
  

@@ -10,11 +10,11 @@ require ($root . '/app/view/fragment/fragmentPatrimoineHeader.html');
     include $root . '/app/view/fragment/fragmentPatrimoineJumbotron.html';
 
     if ($results) {
-      echo "<h3>La nouvelle récolte a été ajoutée/mise à jour</h3>";
+      echo "<h3>Le nouveau compte a été ajoutée/mise à jour</h3>";
       echo "<ul>";
-      echo "<li>producteur_id = " . $producteur_id . "</li>";
-      echo "<li>vin_id = " . $vin_id . "</li>";
-      echo "<li>quantite = " . $quantite . "</li>";
+      echo "<li>label = " . $label . "</li>";
+      echo "<li>montant = " . $montant . "</li>";
+      echo "<li>banque_id = " . $banque_id . "</li>";
       echo "</ul>";
     } else {
       echo "<h3>Erreur lors de l'ajout/mise à jour de la récolte</h3>";

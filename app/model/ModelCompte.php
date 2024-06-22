@@ -105,13 +105,13 @@ class ModelCompte {
   }
  }
 
- public static function getOne($id, $label) {
+ public static function getOne($label, $banque_id) {
   try {
    $database = Model::getInstance();
-   $query = "select * from compte where id = :id and label = :label";
+   $query = "select * from compte where banque_id = :banque_id and label = :label";
    $statement = $database->prepare($query);
    $statement->execute([
-     'id' => $id,
+     'banque_id' => $banque_id,
      'label' => $label
    ]);
    $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelCompte");
@@ -139,36 +139,59 @@ class ModelCompte {
  }
  
  
-public static function insert($id, $label, $montant, $banque_id, $personne_id) {
+public static function insert($label, $montant, $banque_id) {
   try {
    $database = Model::getInstance();
-   $query = "insert into compte (id, label, montant, banque_id, personne_id) values (:id, :label, :montant, :banque_id, :personne_id)";
+
+   // recherche de la valeur de la clé = max(id) + 1
+   $query = "select max(id) from compte";
+   $statement = $database->query($query);
+   $tuple = $statement->fetch();
+   $id = $tuple['0'];
+   $id++;
+
+   // ajout d'un nouveau tuple;
+   $query = "insert into compte value (:id, :label, :montant, :banque_id, :personne_id)";
    $statement = $database->prepare($query);
    $statement->execute([
      'id' => $id,
      'label' => $label,
      'montant' => $montant,
      'banque_id' => $banque_id,
-     'personne_id' => $personne_id
+     'personne_id' => $_SESSION['id']
    ]);
-   return $database->lastInsertId();
+   return $id;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
+   return -1;
   }
  }
+ 
+ public static function getAllById() {
+    try {
+        $database = Model::getInstance();
+        $query = "select * from compte where personne_id = :id";
+        $statement = $database->prepare($query);
+        $statement->execute(['id' => $_SESSION['id']]);
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelCompte");
+        return $results;
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return NULL;
+    }
+}
 
- public static function update($id, $label, $montant, $banque_id, $personne_id) {
+ public static function update($label, $montant, $banque_id) {
   try {
    $database = Model::getInstance();
-   $query = "update compte set montant = :montant where banque_id = :banque_id and personne_id = :personne_id";
+   $query = "update compte set montant = :montant where banque_id = :banque_id and label = :label";
    $statement = $database->prepare($query);
    $statement->execute([
      'montant' => $montant,
      'banque_id' => $banque_id,
-     'personne_id' => $personne_id
+     'label' => $label
    ]);
-   return array($banque_id, $personne_id);
+   return array($banque_id, $label);
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return NULL;

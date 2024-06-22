@@ -46,6 +46,7 @@ switch ($action) {
   break;
 
  case "clientReadAll" :
+ case "clientMonPatrimoine":
   ControllerClient::$action($args);
   break;
   
@@ -54,10 +55,18 @@ switch ($action) {
   break;
 
  case "compteReadAll" :
- case "compteRequetes" :
- case "compteCreate" :
- case "compteCreated" :
+ case "clientMesComptes":
+ case "clientCompteCreate":
+ case "clientCompteCreated":
+ case "clientCompteTranfer":
+ case "clientCompteTransfered":
   ControllerCompte::$action($args);
+  break;
+
+ case "clientMesResidences":
+ case "clientResidenceAchat":
+ case "clientResidenceAchete":
+  ControllerResidence::$action($args);
   break;
 
  case "connection":

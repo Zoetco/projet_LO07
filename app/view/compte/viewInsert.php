@@ -12,7 +12,7 @@ require ($root . '/app/view/fragment/fragmentPatrimoineHeader.html');
 
     <form role="form" method='get' action='router2.php'>
       <div class="form-group">
-        <input type="hidden" name='action' value='banqueCreated'>
+        <input type="hidden" name='action' value='clientCompteCreated'>
         
         <label for="quantite">Label</label>
         <input type="string" step="any" name='label' value='Epargne' class="form-control" style="width: 300px">
