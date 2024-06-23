@@ -36,7 +36,7 @@
             <li><a class="dropdown-item" href="router2.php?action=clientReadAll">Liste des clients</a></li>
             <li><a class="dropdown-item" href="router2.php?action=administrateurReadAll">Liste des administrateurs</a></li>
             <li><a class="dropdown-item" href="router2.php?action=compteReadAll">Liste des comptes</a></li>
-            <li><a class="dropdown-item" href="">Liste des résidences</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=residenceReadAllWithPersonDetails">Liste des résidences</a></li>
           </ul>
         </li>
         

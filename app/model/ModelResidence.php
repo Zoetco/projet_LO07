@@ -156,6 +156,22 @@ public static function insert($id, $label, $ville, $prix, $personne_id) {
    return NULL;
   }
  }
+
+public static function getAllWithPersonDetails() {
+    try {
+        $database = Model::getInstance();
+        $query = "SELECT personne.nom AS client_nom, personne.prenom AS client_prenom, residence.label AS residence_label, residence.ville AS residence_ville, residence.prix AS residence_prix
+                  FROM residence
+                  JOIN personne ON residence.personne_id = personne.id";
+        $statement = $database->prepare($query);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return NULL;
+    }
+}
+ 
  
 }
 ?>

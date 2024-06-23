@@ -54,6 +54,17 @@ class ControllerResidence {
    echo ("ControllerResidence : residenceCreated : vue = $vue");
   require ($vue);
  }
+
+public static function residenceReadAllWithPersonDetails() {
+    $results = ModelResidence::getAllWithPersonDetails();
+    include 'config.php';
+    $vue = $root . '/app/view/residence/viewAll.php';
+    if (DEBUG) {
+        echo ("ControllerResidence : residenceReadAllWithPersonDetails : vue = $vue");
+    }
+    require($vue);
+}
+
  
 }
 ?>
