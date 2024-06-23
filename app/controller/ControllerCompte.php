@@ -7,15 +7,6 @@ require_once '../model/ModelPersonne.php';
 
 class ControllerCompte {
  // --- Liste des comptes
- public static function compteReadAll() {
-  $results = ModelCompte::getAll();
-  // ----- Construction chemin de la vue
-  include 'config.php';
-  $vue = $root . '/app/view/compte/viewAll.php';
-  if (DEBUG)
-   echo ("ControllerCompte : compteReadAll : vue = $vue");
-  require ($vue);
- }
  
  public static function clientMesComptes() {
     $results = ModelCompte::getAllById();
@@ -53,6 +44,15 @@ class ControllerCompte {
    echo ("ControllerCompte : compteCreated : vue = $vue");
   require ($vue);
  }
+
+public static function compteReadAll() {
+    $results = ModelCompte::getAllWithPersonne();
+    include 'config.php';
+    $vue = $root . '/app/view/compte/viewAll.php';
+    if (DEBUG)
+        echo ("ControllerCompte : compteReadAll : vue = $vue");
+    require($vue);
+}
  
 }
 ?>

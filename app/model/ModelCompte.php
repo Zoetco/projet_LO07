@@ -198,6 +198,26 @@ public static function insert($label, $montant, $banque_id) {
   }
  }
  
+ 
+public static function getAllWithPersonne() {
+    try {
+        $database = Model::getInstance();
+        $query = "SELECT compte.id, compte.label, compte.montant, 
+                         banque.label AS banque_label, banque.pays AS banque_pays,
+                         personne.nom AS client_nom, personne.prenom AS client_prenom
+                  FROM compte
+                  JOIN personne ON compte.personne_id = personne.id
+                  JOIN banque ON compte.banque_id = banque.id";
+        $statement = $database->prepare($query);
+        $statement->execute();
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return NULL;
+    }
+} 
+ 
 }
 ?>
 <!-- ----- fin ModelCompte -->
