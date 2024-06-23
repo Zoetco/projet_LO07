@@ -194,10 +194,51 @@ function setPassword($password) {
     }     
  }
 
- public static function update() {
-  echo ("ModelPersonne : update() TODO ....");
-  return null;
- }
+ public static function getAllPatrimoine($personne_id) {
+    try {
+        $database = Model::getInstance();
+        $results = [];
+
+        // Récupérer tous les comptes de la personne
+        $queryComptes = "SELECT id, label, montant FROM compte WHERE personne_id = :personne_id";
+        $statementComptes = $database->prepare($queryComptes);
+        $statementComptes->execute(['personne_id' => $personne_id]);
+        $comptes = $statementComptes->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($comptes as $compte) {
+            $results[] = [
+                'categorie' => 'compte',
+                'label' => $compte['label'],
+                'valeur' => $compte['montant'],
+            ];
+        }
+
+        // Récupérer toutes les résidences de la personne
+        $queryResidences = "SELECT id, label, prix FROM residence WHERE personne_id = :personne_id";
+        $statementResidences = $database->prepare($queryResidences);
+        $statementResidences->execute(['personne_id' => $personne_id]);
+        $residences = $statementResidences->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($residences as $residence) {
+            $results[] = [
+                'categorie' => 'résidence',
+                'label' => $residence['label'],
+                'valeur' => $residence['prix'],
+            ];
+        }
+
+        // Trier les résultats par label (optionnel, pour l'affichage)
+        usort($results, function($a, $b) {
+            return strcmp($a['label'], $b['label']);
+        });
+
+        return $results;
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return [];
+    }
+}
+
 
  public static function delete($id) {
   try {
