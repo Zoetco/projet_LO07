@@ -56,14 +56,26 @@ public static function compteReadAll() {
 }
 
  public static function clientCompteTransfer() {
-  $compte_sender = ModelCompte::getAllById();
-  $compte_receiver = ModelCompte::getAllById();
-  include 'config.php';
-  $vue = $root . '/app/view/compte/viewTransfer.php';
-  if (DEBUG)
-   echo ("ControllerCompte : compteTransfer : vue = $vue");
-  require ($vue);
- }
+    $comptes = ModelCompte::getAllById();
+    $compteCount = count($comptes);
+
+    if ($compteCount < 2) {
+      include 'config.php';
+      $vue = $root . '/app/view/compte/viewError.php';
+      $message = "Vous devez avoir au moins deux comptes pour effectuer un transfert.";
+      if (DEBUG)
+        echo ("ControllerCompte : clientCompteTransfer : vue = $vue");
+      require($vue);
+    } else {
+      $compte_sender = $comptes;
+      $compte_receiver = $comptes;
+      include 'config.php';
+      $vue = $root . '/app/view/compte/viewTransfer.php';
+      if (DEBUG)
+        echo ("ControllerCompte : clientCompteTransfer : vue = $vue");
+      require($vue);
+    }
+  }
 
  public static function clientCompteTransfered($args) {
     $transfer = htmlspecialchars($args['transfer']);

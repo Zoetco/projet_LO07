@@ -4,6 +4,7 @@
 require_once '../model/ModelResidence.php';
 require_once '../model/ModelBanque.php';
 require_once '../model/ModelPersonne.php';
+require_once '../model/ModelCompte.php';
 
 class ControllerResidence {
  // --- Liste des residences
@@ -26,34 +27,46 @@ class ControllerResidence {
     require ($vue);
  } 
  
- public static function residenceCreate() {
-  $vins = ModelBanque::getAll();
-  $producteurs = ModelPersonne::getAll();
+ public static function clientResidenceAchat() {
+  $residence = ModelResidence::getAllNotOwnedByUser();
+  $compte = ModelCompte::getAllById();
   include 'config.php';
-  $vue = $root . '/app/view/residence/viewInsert.php';
+  $vue = $root . '/app/view/residence/viewAchat.php';
   if (DEBUG)
-   echo ("ControllerResidence : residenceCreate : vue = $vue");
+   echo ("ControllerResidence : residenceAchat : vue = $vue");
   require ($vue);
  }
 
- public static function residenceCreated($args) {
-  $producteur_id = htmlspecialchars($args['banque_id']);
-  $vin_id = htmlspecialchars($args['personne_id']);
-  $quantite = htmlspecialchars($args['montant']);
+ public static function clientResidenceAchete($args) {
+    $residence_id = htmlspecialchars($args['residence_id']);
+    $sender_id = htmlspecialchars($args['sender_id']);
+    
+    // Obtenir le propriétaire actuel de la résidence
+    $receiver_id = ModelResidence::getCompteProprietaire($residence_id);
+    
+    if (is_null($receiver_id)) {
+        include 'config.php';
+        $vue = $root . '/app/view/compte/viewError.php';
+        $message = "Le propriétaire de cette résidence n'a pas de compte.";
+        if (DEBUG)
+            echo ("ControllerResidence : residenceAchete : vue = $vue");
+        require($vue);
+        return;
+    }
+    
+    // Obtenir le prix de la résidence
+    $transfer = ModelResidence::getPrixForId($residence_id);
+    
+    // Effectuer l'achat
+    $results = ModelResidence::achat($transfer, $sender_id, $receiver_id, $residence_id);
+    
+    include 'config.php';
+    $vue = $root . '/app/view/residence/viewAchete.php';
+    if (DEBUG)
+        echo ("ControllerResidence : clientResidenceAchete : vue = $vue");
+    require ($vue);
+}
 
-  $existingRecolte = ModelResidence::getOne($banque_id, $personne_id);
-  if (empty($existingRecolte)) {
-    $results = ModelResidence::insert($banque_id, $personne_id, $montant);
-  } else {
-    $results = ModelResidence::update($banque_id, $personne_id, $montant);
-  }
-
-  include 'config.php';
-  $vue = $root . '/app/view/residence/viewInserted.php';
-  if (DEBUG)
-   echo ("ControllerResidence : residenceCreated : vue = $vue");
-  require ($vue);
- }
 
 public static function residenceReadAllWithPersonDetails() {
     $results = ModelResidence::getAllWithPersonDetails();

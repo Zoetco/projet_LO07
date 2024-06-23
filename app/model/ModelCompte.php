@@ -200,6 +200,26 @@ public static function insert($label, $montant, $banque_id) {
     }
 }
 
+public static function getFirstAccountIdByPersonneId($personne_id) {
+    try {
+        $database = Model::getInstance();
+        $query = "SELECT id FROM compte WHERE personne_id = :personne_id ORDER BY id ASC LIMIT 1";
+        $statement = $database->prepare($query);
+        $statement->execute(['personne_id' => $personne_id]);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return $result['id'];
+        }
+
+        return null; // Ajustement en cas où aucun compte n'est trouvé pour cette personne
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return null;
+    }
+}
+
+
 public static function transfer($transfer, $sender_id, $receiver_id) {
     if ($sender_id != $receiver_id) {
       try {

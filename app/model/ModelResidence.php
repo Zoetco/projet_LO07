@@ -187,6 +187,83 @@ public static function getAllWithPersonDetails() {
     }
 }
  
+public static function getAllNotOwnedByUser() {
+    try {
+        $database = Model::getInstance();
+        $query = "SELECT * FROM residence WHERE personne_id != :personne_id OR personne_id IS NULL";
+        $statement = $database->prepare($query);
+        $statement->execute(['personne_id' => $_SESSION['id']]);
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelResidence");
+        return $results;
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return NULL;
+    }
+}
+
+public static function getPrixForId($id) {
+    try {
+        $database = Model::getInstance();
+        $query = "SELECT prix FROM residence WHERE id = :id";
+        $statement = $database->prepare($query);
+        $statement->execute(['id' => $id]);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result['prix'];
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return NULL;
+    }
+}
+
+public static function getCompteProprietaire($residence_id) {
+    try {
+        $database = Model::getInstance();
+        $query = "SELECT personne_id FROM residence WHERE id = :id";
+        $statement = $database->prepare($query);
+        $statement->execute(['id' => $residence_id]);
+        $proprietaire = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($proprietaire) {
+            $personne_id = $proprietaire['personne_id'];
+            $compteProprietaire = ModelCompte::getFirstAccountIdByPersonneId($personne_id);
+            return $compteProprietaire;
+        }
+
+        return null; // Ajustement en cas où la résidence n'est pas trouvée
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return null;
+    }
+}
+
+
+public static function achat($transfer, $sender_id, $receiver_id, $residence_id) {
+    try {
+        $database = Model::getInstance();
+        
+        // Début de la transaction
+        $database->beginTransaction();
+        
+        // Mettre à jour les comptes
+        $results = ModelCompte::transfer($transfer, $sender_id, $receiver_id);
+        
+        // Mettre à jour le propriétaire de la résidence
+        $query = "UPDATE residence SET personne_id = :personne_id WHERE id = :residence_id";
+        $statement = $database->prepare($query);
+        $statement->execute(['personne_id' => $_SESSION['id'], 'residence_id' => $residence_id]);
+        
+        // Commit de la transaction
+        $database->commit();
+        
+        return $results;
+    } catch (PDOException $e) {
+        // Rollback de la transaction en cas d'erreur
+        $database->rollBack();
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return NULL;
+    }
+}
+
  
 }
 ?>
