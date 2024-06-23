@@ -17,7 +17,11 @@ require ($root . '/app/view/fragment/fragmentPatrimoineHeader.html');
         <input type="hidden" name='action' value='PersonneAjoutee'>        
         <label class='w-25' for="id">Nom : </label><input type="text" name='nom' size='75' value='Stone'> <br/>                          
         <label class='w-25' for="id">Prénom : </label><input type="text" name='prenom' value='Emma'> <br/> 
-        <label class='w-25' for="id">Statut (0 = Administrateur ou 1 = Client) : </label><input type="number" step='any' name='statut' value='1'> <br/>          
+        <label class='w-25' for="statut">Statut :</label><br/>
+        <input type="radio" id="statut" name="statut" value="0">
+        <label for="admin">Administrateur</label><br/>
+        <input type="radio" id="statut" name="statut" value="1" checked>
+        <label for="client">Client</label><br/>          
         <label class='w-25' for="id">Login : </label><input type="text" name='login' size='20' value='utilisateur'> <br/>                          
         <label class='w-25' for="id">Mot de Passe : </label><input type="text" name='password' size='12' value='secret'> <br/>
       </div>
