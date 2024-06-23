@@ -53,7 +53,32 @@ public static function compteReadAll() {
         echo ("ControllerCompte : compteReadAll : vue = $vue");
     require($vue);
 }
- 
+
+ public static function clientCompteTransfer() {
+  $compte_sender = ModelCompte::getAllById();
+  $compte_receiver = ModelCompte::getAllById();
+  include 'config.php';
+  $vue = $root . '/app/view/compte/viewTransfer.php';
+  if (DEBUG)
+   echo ("ControllerCompte : compteTransfer : vue = $vue");
+  require ($vue);
+ }
+
+ public static function clientCompteTransfered($args) {
+    $transfer = htmlspecialchars($args['transfer']);
+    $sender_id = htmlspecialchars($args['sender_id']);
+    $receiver_id = htmlspecialchars($args['receiver_id']);
+
+    $results = ModelCompte::transfer($transfer, $sender_id, $receiver_id);
+    
+    include 'config.php';
+    $vue = $root . '/app/view/compte/viewTransfered.php';
+    if (DEBUG)
+      echo ("ControllerCompte : compteTransfered : vue = $vue");
+    require ($vue);
+  }
+
+
 }
 ?>
 <!-- ----- fin ControllerCompte -->

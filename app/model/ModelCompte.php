@@ -181,6 +181,50 @@ public static function insert($label, $montant, $banque_id) {
     }
 }
 
+public static function transfer($transfer, $sender_id, $receiver_id) {
+    if ($sender_id != $receiver_id) {
+      try {
+        $database = Model::getInstance();
+
+        // Récupérer le montant actuel du compte débiteur
+        $query = "SELECT montant FROM compte WHERE id = :id";
+        $statement = $database->prepare($query);
+        $statement->execute(['id' => $sender_id]);
+        $sender = $statement->fetch(PDO::FETCH_ASSOC);
+
+        // Récupérer le montant actuel du compte créditeur
+        $statement->execute(['id' => $receiver_id]);
+        $receiver = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($sender && $receiver) {
+          // Mettre à jour le montant du compte débiteur
+          $new_sender_montant = $sender['montant'] - $transfer;
+          $query = "UPDATE compte SET montant = :montant WHERE id = :id";
+          $statement = $database->prepare($query);
+          $statement->execute(['montant' => $new_sender_montant, 'id' => $sender_id]);
+
+          // Mettre à jour le montant du compte créditeur
+          $new_receiver_montant = $receiver['montant'] + $transfer;
+          $statement->execute(['montant' => $new_receiver_montant, 'id' => $receiver_id]);
+
+          return [
+            'sender_id' => $sender_id,
+            'sender_new_montant' => $new_sender_montant,
+            'receiver_id' => $receiver_id,
+            'receiver_new_montant' => $new_receiver_montant
+          ];
+        } else {
+          return NULL; // Un des comptes n'existe pas
+        }
+      } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return NULL;
+      }
+    } else {
+      return NULL; // Les comptes sont identiques
+    }
+  }
+
  public static function update($label, $montant, $banque_id) {
   try {
    $database = Model::getInstance();
