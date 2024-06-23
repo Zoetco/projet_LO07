@@ -80,7 +80,23 @@ class ControllerPatrimoine {
   $vue = $root . '/app/view/patrimoine/viewDeconnected.php';
   require ($vue);
  }
-    
+ 
+ public static function innovationOriginale() {
+    $results = ModelPersonne::getAllByStatut(ModelPersonne::CLIENT); // Récupérer tous les clients
+    include 'config.php';
+    $vue = $root . '/app/view/patrimoine/viewInnovationOriginale.php';
+    if (DEBUG)
+        echo ("ControllerPatrimoine : innovationOriginale : vue = $vue");
+    require ($vue);
+}
+
+public static function ameliorationMVC() {
+    include 'config.php';
+    $vue = $root . '/app/view/patrimoine/viewAmeliorationMVC.php';
+    if (DEBUG)
+        echo ("ControllerPatrimoine : ameliorationMVC : vue = $vue");
+    require ($vue);
+}
  
 }
 ?>

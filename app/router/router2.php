@@ -6,7 +6,6 @@ session_start();
 require ('../controller/ControllerBanque.php');
 require ('../controller/ControllerCompte.php');
 require ('../controller/ControllerPatrimoine.php');
-require ('../controller/ControllerPersonne.php');
 require ('../controller/ControllerAdministrateur.php');
 require ('../controller/ControllerClient.php');
 require ('../controller/ControllerResidence.php'); 
@@ -41,13 +40,8 @@ switch ($action) {
   ControllerBanque::$action($args);
   break;
 
- case "personneReadAll" :
- case "personneReadOne" :
- case "personneReadId" :
-  ControllerPersonne::$action($args);
-  break;
 
- case "clientReadAll" :
+case "clientReadAll" :
  case "clientMonPatrimoine":
   ControllerClient::$action($args);
   break;
@@ -76,7 +70,8 @@ switch ($action) {
 
  case "connection":
  case "connected":
- case "mesPropositions" :
+ case "innovationOriginale" :
+ case "ameliorationMVC" :
  case "Inscription":
  case "PersonneAjoutee":
  case "deconnection":

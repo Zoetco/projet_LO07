@@ -13,7 +13,6 @@ class ControllerAdministrateur {
         require ($vue);
     }
 
-    // Autres méthodes spécifiques aux administrateurs...
 }
 ?>
 <!-- ----- fin ControllerAdministrateur -->

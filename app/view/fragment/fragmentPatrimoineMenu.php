@@ -43,8 +43,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Innovations</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="">Proposez une innovation originale</a></li>
-            <li><a class="dropdown-item" href="">Proposez une amélioration du code MVC</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=innovationOriginale">Proposez une innovation originale</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=ameliorationMVC">Proposez une amélioration du code MVC</a></li>
           </ul>
         </li>
 
@@ -86,8 +86,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Innovations</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="">Proposez une innovation originale</a></li>
-            <li><a class="dropdown-item" href="">Proposez une amélioration du code MVC</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=innovationOriginale">Proposez une innovation originale</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=ameliorationMVC">Proposez une amélioration du code MVC</a></li>
           </ul>
         </li>        
         
@@ -107,8 +107,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Innovations</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="">Proposez une innovation originale</a></li>
-            <li><a class="dropdown-item" href="">Proposez une amélioration du code MVC</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=innovationOriginale">Proposez une innovation originale</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=ameliorationMVC">Proposez une amélioration du code MVC</a></li>
           </ul>
         </li>        
         
