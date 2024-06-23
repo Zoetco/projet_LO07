@@ -11,7 +11,7 @@ class ControllerCompte {
  public static function clientMesComptes() {
     $results = ModelCompte::getAllById();
     include 'config.php';
-    $vue = $root . '/app/view/compte/viewAll.php';
+    $vue = $root . '/app/view/compte/viewMyAll.php';
     if (DEBUG)
         echo ("ControllerCompte : clientMesComptes : vue = $vue");
     require ($vue);

@@ -121,6 +121,21 @@ class ModelResidence {
    return NULL;
   }
  }
+ 
+ public static function getAllById() {
+    try {
+        $database = Model::getInstance();
+        $query = "select * from residence where personne_id = :id";
+        $statement = $database->prepare($query);
+        $statement->execute(['id' => $_SESSION['id']]);
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelResidence");
+        return $results;
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return NULL;
+    }
+}
+ 
 public static function insert($id, $label, $ville, $prix, $personne_id) {
   try {
    $database = Model::getInstance();

@@ -20,7 +20,7 @@ class ControllerResidence {
  public static function clientMesResidences() {
     $results = ModelResidence::getAllById();
     include 'config.php';
-    $vue = $root . '/app/view/residence/viewAll.php';
+    $vue = $root . '/app/view/residence/viewMyAll.php';
     if (DEBUG)
         echo ("ControllerResidence : clientMesResidences : vue = $vue");
     require ($vue);
