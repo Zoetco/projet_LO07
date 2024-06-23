@@ -62,6 +62,8 @@ switch ($action) {
  case "clientCompteCreated":
  case "clientCompteTransfer":
  case "clientCompteTransfered":
+ case "compteSelectBanque":
+ case "compteListByBanque":
   ControllerCompte::$action($args);
   break;
 

@@ -70,19 +70,6 @@ class ModelBanque {
   }
  }
 
- public static function getAll() {
-  try {
-   $database = Model::getInstance();
-   $query = "select * from banque";
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelBanque");
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
 
  public static function getOne($id) {
   try {
@@ -164,6 +151,20 @@ public static function insert($label, $pays) {
   }
  }
 
+public static function getAll() {
+    try {
+        $database = Model::getInstance();
+        $query = "select * from banque";
+        $statement = $database->prepare($query);
+        $statement->execute();
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelBanque");
+        return $results;
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return NULL;
+    }
+} 
+ 
 }
 ?>
 <!-- ----- fin ModelBanque -->

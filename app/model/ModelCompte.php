@@ -122,22 +122,41 @@ class ModelCompte {
   }
  }
  
- public static function getCompteBanque($id) {
-  try {
-   $database = Model::getInstance();
-   $query = "select * from compte where banque_id = :id";
-   $statement = $database->prepare($query);
-   $statement->execute([
-     'id' => $id
-   ]);
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelCompte");
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
+public static function getCompteBanque($id) {
+ try {
+  $database = Model::getInstance();
+  $query = "select * from compte where banque_id = :id";
+  $statement = $database->prepare($query);
+  $statement->execute([
+    'id' => $id
+  ]);
+  $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelCompte");
+  return $results;
+ } catch (PDOException $e) {
+  printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+  return NULL;
  }
- 
+}
+
+public static function getByBanqueId($banque_id) {
+   try {
+       $database = Model::getInstance();
+       $query = "SELECT personne.prenom, personne.nom, banque.label AS banque_label, 
+                        compte.label AS compte_label, compte.montant
+                 FROM compte
+                 JOIN personne ON compte.personne_id = personne.id
+                 JOIN banque ON compte.banque_id = banque.id
+                 WHERE compte.banque_id = :banque_id";
+       $statement = $database->prepare($query);
+       $statement->execute(['banque_id' => $banque_id]);
+       $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+       return $results;
+   } catch (PDOException $e) {
+       printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+       return NULL;
+   }
+}
+
  
 public static function insert($label, $montant, $banque_id) {
   try {
@@ -261,7 +280,8 @@ public static function getAllWithPersonne() {
         return NULL;
     }
 } 
- 
+
+
 }
 ?>
 <!-- ----- fin ModelCompte -->

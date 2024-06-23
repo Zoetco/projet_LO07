@@ -26,7 +26,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="router2.php?action=banqueReadAll">Liste des banques</a></li>
             <li><a class="dropdown-item" href="router2.php?action=banqueCreate&target=banqueCreated">Ajout d'une banque</a></li>
-            <li><a class="dropdown-item" href="router2.php?action=banqueReadId&target=banqueReadAllAccounts">Liste des comptes d'une banque</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=compteSelectBanque&target=compteListByBanque">Liste des comptes d'une banque</a></li>
           </ul>
         </li>
 

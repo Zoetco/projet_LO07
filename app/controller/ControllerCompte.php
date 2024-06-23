@@ -5,6 +5,7 @@ require_once '../model/ModelCompte.php';
 require_once '../model/ModelBanque.php';
 require_once '../model/ModelPersonne.php';
 
+
 class ControllerCompte {
  // --- Liste des comptes
  
@@ -78,6 +79,24 @@ public static function compteReadAll() {
     require ($vue);
   }
 
+
+public static function compteListByBanque($args) {
+    $banque_id = htmlspecialchars($args['banque_id']);
+    $comptes = ModelCompte::getByBanqueId($banque_id);
+    include 'config.php';
+    $vue = $root . '/app/view/compte/viewListCompteByBanque.php';
+    require ($vue);
+}
+
+public static function compteSelectBanque() {
+    $banques = ModelBanque::getAll();
+    include 'config.php';
+    $vue = $root . '/app/view/banque/viewSelectBanque.php';
+    if (DEBUG) {
+        echo ("ControllerCompte : compteSelectBanque : vue = $vue");
+    }
+    require($vue);
+}
 
 }
 ?>
