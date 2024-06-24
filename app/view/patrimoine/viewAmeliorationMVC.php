@@ -12,8 +12,10 @@ require($root . '/app/view/fragment/fragmentPatrimoineHeader.html');
 
     <div class="row">
       <div class="col-md-12">
-<<<<<<< Updated upstream
           <h2>Amélioration du code MVC vu en cours :</h2><br> 
+          
+          <h4>1. Méthodes génériques pour limiter les redondances de code</h4>
+          
         <p>Afin de limiter les redondances de code dans notre modèle MVC, nous pourrions utiliser des méthodes plus génériques pour les fonctions de bases des modèles.</p>
         <p>En effet, nous avons remarqué que beaucoup de fonctions se retrouvaient dans chaque modèle, comme les fonctions de création et de lecture par exemple.</p>
         <p>Nous pourrions donc créer une méthode générique pour chacune de ses fonctions dans le fichier Model.php et faire hériter nos modèles de ces méthodes.</p>
@@ -40,16 +42,15 @@ class ModelResidence extends Model {
     protected static $table = \'residence\';
 }
 ?>'); ?></code></pre>
-=======
-        <h2>Amélioration du code MVC :</h2>
-        
-        <h4>1. Visualisations avec Chart.js</h4>
+               
+        <h4>2. Visualisations avec Chart.js</h4>
         <p>
             Dans la continuation de notre idée originale d'utilisation du site Patrimoine. Nous avons
-            pensé à pouvoir faire des grphiques de visualisation de certaines données de notre BDD. 
+            pensé à pouvoir faire des graphiques de visualisation de certaines données de notre BDD. 
         </p>
         <p>
-            On pourrait par exemple intégré des graphiques en utilisant la librairie Javascript Chart.js
+            On pourrait par exemple intégré des graphiques en utilisant la librairie Javascript 
+            <a href="https://www.chartjs.org/">Chart.js</a>
             qui est open-source et facile d'utilisation.            
         </p>
         <p>
@@ -63,8 +64,6 @@ class ModelResidence extends Model {
             le Javascript qui est aussi très utilisé dans le développement Web.
         </p>
         
-        <h4>2. CRUD ?</h4>
->>>>>>> Stashed changes
       </div>
     </div>
   </div>
