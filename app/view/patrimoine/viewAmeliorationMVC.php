@@ -50,7 +50,7 @@ class ModelResidence extends Model {
         </p>
         <p>
             On pourrait par exemple intégré des graphiques en utilisant la librairie Javascript 
-            <a href="https://www.chartjs.org/">Chart.js</a>
+            <a href="https://www.chartjs.org/" target="_blank">Chart.js</a>
             qui est open-source et facile d'utilisation.            
         </p>
         <p>
