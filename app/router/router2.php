@@ -1,6 +1,8 @@
 
 <!-- ----- debut Router2 -->
 <?php
+session_start();
+
 require ('../controller/ControllerBanque.php');
 require ('../controller/ControllerCompte.php');
 require ('../controller/ControllerPatrimoine.php');
