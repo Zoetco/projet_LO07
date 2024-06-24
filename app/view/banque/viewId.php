@@ -16,12 +16,16 @@ require ($root . '/app/view/fragment/fragmentPatrimoineHeader.html');
     <form role="form" method='get' action='router2.php'>
       <div class="form-group">
         <input type="hidden" name='action' value='<?php echo ($target); ?>'>
-        <label for="id">id : </label> <select class="form-control" id='id' name='id' style="width: 100px">
-            <?php
-            foreach ($results as $id) {
-                echo ("<option>$id</option>");
-            }
-            ?>
+        <label for="banque_id">Sélectionner une banque : </label>
+        <select class="form-control" id='id' name='id' style="width: 300px">
+          <?php
+          foreach ($banques as $banque) {
+            $id = $banque->getId();
+            $label = $banque->getLabel();
+            $pays = $banque->getPays();
+            echo "<option value='$id'>$label $pays</option>";
+          }
+          ?>
         </select>
       </div>
       <p/><br/>

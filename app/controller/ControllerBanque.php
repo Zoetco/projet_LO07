@@ -19,7 +19,7 @@ class ControllerBanque {
  // Affiche un formulaire pour sélectionner un id qui existe
  public static function banqueReadId($args) {
   //if (DEBUG) echo ("ControllerBanque::banqueReadId:begin</br>");
-  $results = ModelBanque::getAllId();
+  $banques = ModelBanque::getAll();
   
   // passage du nom de la méthode cible pour le champ action du formulaire
   // Solution 1 : banqueReadOne
@@ -41,7 +41,7 @@ class ControllerBanque {
 
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/compte/viewAll.php';
+  $vue = $root . '/app/view/compte/viewAllBanqueCompte.php';
   require ($vue);
  }
 
