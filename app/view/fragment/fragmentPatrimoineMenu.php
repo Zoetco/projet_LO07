@@ -52,7 +52,6 @@
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Se connecter</a>
           <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="router2.php?action=connection&target=connected">Login</a></li>
-              <li><a class="dropdown-item" href="router2.php?action=Inscription&target=PersonneAjoutee">S'inscrire</a></li>
               <li><a class="dropdown-item" href="router2.php?action=deconnection">Déconnexion</a></li>
           </ul>
         </li>  
